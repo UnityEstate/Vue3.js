@@ -6,19 +6,18 @@
 </template>
 
 <script>
-  import Logo from "../components/Logo.vue";
+import Logo from "../components/Logo.vue";
 
-  export default {
-    name: "About",
-    components: {
-      Logo,
-    },
-  };
+export default {
+  name: "About",
+  components: {
+    Logo,
+  },
+};
 </script>
 
 <style scoped>
- .about {
-   color: red; 
-   }
+.about {
+  color: red;
+}
 </style>
-
