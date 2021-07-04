@@ -13,7 +13,7 @@
 
 <script>
 import Logo from "../components/Logo.vue";
-import {ref, reactive} from "vue";
+import {ref, reactive, onMounted, onUnmounted} from "vue";
 
 export default {
   name: "About",
@@ -28,6 +28,16 @@ export default {
         alt : "My Image"
     }); 
     const isShow = ref(false);
+
+    onMounted (()=>{
+      alert("Hello About Page")
+
+    });
+    onUnmounted(()=>{
+      alert("Bye About Page")
+
+    });
+
     const greet = () => {
       // alert("Hello Vue3");
       email.value = "John@gmail.com";

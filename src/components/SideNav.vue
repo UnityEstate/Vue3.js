@@ -10,12 +10,20 @@
             </div>
             หน้าหลัก
           </router-link>
-          <router-link class="nav-link" to="{name:'About'}">
+          <router-link class="nav-link" :to="{name:'About'}">
             <div class="sb-nav-link-icon">
               <i class="fas fa-chart-area"></i>
             </div>
             เกี่ยวกับเรา
           </router-link>
+
+          <div class="sb-sidenav-menu-heading">ข้อมูลหลัก</div>
+          <router-link class="nav-link" to="/product">
+            <div class="sb-nav-link-icon">
+              <i class="fas fa-chart-area"></i>
+            </div>
+            สินค้า
+          </router-link>        
           
           <a class="nav-link" href="tables.html">
             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

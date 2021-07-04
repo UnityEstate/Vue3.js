@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import DashBoard from "../layouts/DashBoard.vue";
+import Product from "../views/Product.vue";
 
 const routes = [
   {
@@ -12,14 +13,19 @@ const routes = [
       {
         path: "",
         name: "Home", //ชื่อของ Route
-        component: Home,
+        component: Home
         // component: () =>  //lazy load
         //   import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
       },
       {
         path: "about",
         name: "About",
-        component: About,
+        component: About
+      },
+      {
+        path: "product",
+        name: "Product",
+        component: Product
       },
     ],
   },
