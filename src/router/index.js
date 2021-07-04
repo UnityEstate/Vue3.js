@@ -1,15 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import DashBoard from "../layouts/DashBoard.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "DashBoard",
+    component: DashBoard,
     children: [
       {
         path: "",
-        name: "Home",
+        name: "Home", //ชื่อของ Route
+        component: Home
+        // component: () =>  //lazy load
+        //   import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
       },
     ],
   },
