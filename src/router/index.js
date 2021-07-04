@@ -13,19 +13,19 @@ const routes = [
       {
         path: "",
         name: "Home", //ชื่อของ Route
-        component: Home
+        component: Home,
         // component: () =>  //lazy load
         //   import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
       },
       {
         path: "about",
         name: "About",
-        component: About
+        component: About,
       },
       {
         path: "product",
         name: "Product",
-        component: Product
+        component: Product,
       },
     ],
   },
@@ -43,7 +43,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-  linkExactActiveClass:"active"
+  linkExactActiveClass: "active",
 });
 
 export default router;

@@ -10,7 +10,7 @@
             </div>
             หน้าหลัก
           </router-link>
-          <router-link class="nav-link" :to="{name:'About'}">
+          <router-link class="nav-link" :to="{ name: 'About' }">
             <div class="sb-nav-link-icon">
               <i class="fas fa-chart-area"></i>
             </div>
@@ -23,8 +23,8 @@
               <i class="fas fa-chart-area"></i>
             </div>
             สินค้า
-          </router-link>        
-          
+          </router-link>
+
           <a class="nav-link" href="tables.html">
             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
             Tables
@@ -45,5 +45,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
