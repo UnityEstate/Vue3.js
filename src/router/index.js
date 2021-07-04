@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import About from "../views/About.vue";
 import DashBoard from "../layouts/DashBoard.vue";
 
 const routes = [
@@ -11,9 +12,14 @@ const routes = [
       {
         path: "",
         name: "Home", //ชื่อของ Route
-        component: Home
+        component: Home,
         // component: () =>  //lazy load
         //   import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
+      },
+      {
+        path: "about",
+        name: "About",
+        component: About,
       },
     ],
   },
@@ -31,6 +37,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  linkExactActiveClass:"active"
 });
 
 export default router;
