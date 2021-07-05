@@ -4,6 +4,8 @@ import About from "../views/About.vue";
 import DashBoard from "../layouts/DashBoard.vue";
 import Product from "../views/Product.vue";
 
+import categoryRoute from "../views/category/category-route";
+
 const routes = [
   {
     path: "/",
@@ -27,6 +29,8 @@ const routes = [
         name: "Product",
         component: Product,
       },
+      ...categoryRoute,
+
     ],
   },
   {
