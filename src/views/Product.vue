@@ -38,7 +38,9 @@ export default {
   setup() {
     const products = ref([]); //data ส่งมาเป็น array
     const getData = async () => {
-      const response = await axios.get("https://api.codingthailand.com/api/course"); 
+      const response = await axios.get(
+        "https://api.codingthailand.com/api/course"
+      );
       products.value = response.data.data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 เป็นค่าที่ backend ส่งมา
 
       // console.log(products.value);
