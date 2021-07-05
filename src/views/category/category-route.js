@@ -1,7 +1,7 @@
 import {h, resolveComponent} from "vue";
 
 import CategoryIndex from "./CategoryIndex.vue";
-// import CategoryAdd from "./CategoryAdd.vue";
+import CategoryAdd from "./CategoryAdd.vue";
 // import CategoryEdit from "./CategoryEdit.vue";
 
 const categoryRoute = [
@@ -16,7 +16,13 @@ const categoryRoute = [
                 path: "",
                 name: "CategoryIndex",
                 component: CategoryIndex
+            },
+            {
+                path: "add",
+                name: "CategoryAdd",
+                component: CategoryAdd
             }
+            
         ]
 
     }

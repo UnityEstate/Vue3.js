@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-xl-12 col-md-12">
         <h1>สินค้า</h1>
+        <router-link to="/category/add" class="btn btn-primary" >เพิ่มข้อมูล</router-link> 
 
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
           {{ errorMessage }}
