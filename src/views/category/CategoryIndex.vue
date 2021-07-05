@@ -2,7 +2,7 @@
   <div class="container-fluid px-4">
     <div class="row">
       <div class="col-xl-12 col-md-12">
-        <h1>สินค้า</h1>
+        <h1>ประเภทสินค้า</h1>
         <router-link to="/category/add" class="btn btn-primary" >เพิ่มข้อมูล</router-link> 
 
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
@@ -39,6 +39,9 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import {BASE_API_URL} from "../../constants";
+
+
 export default {
   name: "CategoryIndex",
   setup() {
@@ -50,7 +53,7 @@ export default {
       try {
         Loading.value = true; //ถ้าค่า = true ให้เริ่มหมุน
         const response = await axios.get(
-          "https://api.codingthailand.com/api/category"
+          `${BASE_API_URL}/api/category`
         );
         categories.value = response.data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 ไม่มีเนื่องจากที่ postman ไม่ได้ส่งมา
         // console.log(products.data);

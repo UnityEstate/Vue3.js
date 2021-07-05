@@ -6,11 +6,8 @@
         <form @submit.prevent="onSubmit">
           <div class="mb-3">
             <label for="ืname" class="form-label">ชื่อประเภทสินค้า</label>
-            <input v-model="name"
-              type="text"
-              class="form-control"
-              id="name"  /> 
-              {{name}} 
+            <input v-model="name" type="text" class="form-control" id="name" />
+            {{ name }}
           </div>
           <button type="submit" class="btn btn-primary">บันทึก</button>
         </form>
@@ -20,27 +17,36 @@
 </template>
 
 <script>
-
 import { ref } from "vue";
 import axios from "axios";
-import {useRouter} from "vue-router";  //เปิดเพจใหม่คล้าย router-link
+import { useRouter } from "vue-router"; //เปิดเพจใหม่คล้าย router-link
+import Swal from "sweetalert2";
+import {BASE_API_URL} from "../../constants";
 
 export default {
   name: "CategoryAdd",
-  setup(){
+  setup() {
     const name = ref("");
     const router = useRouter();
 
-    const onSubmit = async() => {
-      const response = await axios.post("https://api.codingthailand.com/api/category",{
-        name: name.value
-      });
-      alert(response.data.message);
-      router.replace('/category');
-    }
+    const onSubmit = async () => {
+      const response = await axios.post(
+        `${BASE_API_URL}/api/category`,
+        {
+          name: name.value,
+        }
+      );
+      // alert(response.data.message);
+      Swal.fire(
+        response.data.message,
+        "ผลการทำงาน",
+        "success"
+        );
+      router.replace("/category");
+    };
 
-    return {name, onSubmit};
-  }
+    return { name, onSubmit };
+  },
 };
 </script>
 
