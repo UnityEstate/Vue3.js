@@ -3,9 +3,7 @@
     <div class="row">
       <div class="col-xl-12 col-md-12">
         <h1>ประเภทสินค้า</h1>
-        <router-link to="/category/add" class="btn btn-primary"
-          >เพิ่มข้อมูล</router-link
-        >
+        <router-link to="/category/add" class="btn btn-primary">เพิ่มข้อมูล</router-link> 
 
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
           {{ errorMessage }}
@@ -30,29 +28,16 @@
               <th scope="row">{{ item.id }}</th>
               <td>{{ item.name }}</td>
               <td>
-                <router-link
-                  :to="{ name: 'CategoryEdit', params: { id: item.id } }"
-                >
+                <router-link :to="{name: 'CategoryEdit', params:{id:item.id}}">
                   แก้ไข
-                </router-link>
-                |
-                <a href="#" @click.prevent="deleteCategoryById(item.id)">
+                </router-link> |
+                <a href="#" @click.prevent="deleteCategoryById(item.id)" >
                   ลบ
                 </a>
-              </td>
+                </td>
             </tr>
           </tbody>
         </table>
-        <br />
-        <div v-if="categories.length" >
-          <v-pagination
-          v-model="page"
-          :pages="totalPage"
-          :range-size="1"
-          active-color="#DCEDFF"
-          @update:modelValue="getData"
-          />
-        </div>        
       </div>
     </div>
   </div>
@@ -61,30 +46,25 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { BASE_API_URL } from "../../constants";
-import Swal from "sweetalert2";
-import VPagination from "@hennge/vue3-pagination";
+import {BASE_API_URL} from "../../constants";
+import Swal from 'sweetalert2';
 
 
 export default {
-  name: "CategoryIndex",
-  components: {
-    VPagination,
-  },
+  name: "CategoryIndexV1",
   setup() {
     const categories = ref([]); //data ส่งมาเป็น array ชื่อเป็นพหูพจน์
     const errorMessage = ref(""); //string
     const Loading = ref(false); //ยังไม่ให้แสดงตัวช่วยโหลด
-    const page = ref(1); //เริ่มต้นที่หน้า 1
-    const totalPage = ref(0);
-
-    const getData = async (page) => {
+    
+    const getData = async () => {
       try {
         Loading.value = true; //ถ้าค่า = true ให้เริ่มหมุน
-        const response = await axios.get(`${BASE_API_URL}/api/category?page=${page}&page_size=10`);
-        categories.value = response.data.data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 ไม่มีเนื่องจากที่ postman ไม่ได้ส่งมา
+        const response = await axios.get(
+          `${BASE_API_URL}/api/category`
+        );
+        categories.value = response.data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 ไม่มีเนื่องจากที่ postman ไม่ได้ส่งมา
         // console.log(products.data);
-        totalPage.value = response.data.last_page;
       } catch (error) {
         //400, 500
         console.log(error);
@@ -95,21 +75,23 @@ export default {
     };
 
     onMounted(() => {
-      getData(page.value); //เริ่มต้นหน้า 1 
+      getData();
     });
 
     const deleteCategoryById = async (id) => {
       const isConfirm = window.confirm("แน่ใจว่าต้องการลบข้อมูลนี้");
       if (isConfirm == true) {
-        const response = await axios.delete(
-          `${BASE_API_URL}/api/category/${id}`
+        const response = await axios.delete(`${BASE_API_URL}/api/category/${id}`);  
+        await Swal.fire(
+          response.data.message,
+          'ผลการทำงาน',
+          'success'
         );
-        await Swal.fire(response.data.message, "ผลการทำงาน", "success");
         history.go(0);
       }
-    };
+    }
 
-    return { categories, errorMessage, Loading, deleteCategoryById, page, totalPage, getData };
+    return { categories, errorMessage, Loading,deleteCategoryById };
   },
 };
 </script>
