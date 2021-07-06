@@ -43,7 +43,8 @@ export default {
     }
 
     const onSubmit = async () => {
-      const response = await axios.post(`${BASE_API_URL}/api/category`,{
+      const response = await axios.put(`${BASE_API_URL}/api/category`,{
+        id: id.value,
         name: name.value,
         });
       // alert(response.data.message);

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xl-12 col-md-12">
         <h1>ประเภทสินค้า</h1>
-        <router-link to="/category/add" class="btn btn-primary" >เพิ่มข้อมูล</router-link> 
+        <router-link to="/category/add" class="btn btn-primary">เพิ่มข้อมูล</router-link> 
 
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
           {{ errorMessage }}
@@ -30,8 +30,11 @@
               <td>
                 <router-link :to="{name: 'CategoryEdit', params:{id:item.id}}">
                   แก้ไข
-                </router-link>
-                Delete</td>
+                </router-link> |
+                <a href="#" @click.prevent="deleteCategoryById(item.id)" >
+                  ลบ
+                </a>
+                </td>
             </tr>
           </tbody>
         </table>
@@ -44,6 +47,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import {BASE_API_URL} from "../../constants";
+import Swal from 'sweetalert2';
 
 
 export default {
@@ -52,7 +56,7 @@ export default {
     const categories = ref([]); //data ส่งมาเป็น array ชื่อเป็นพหูพจน์
     const errorMessage = ref(""); //string
     const Loading = ref(false); //ยังไม่ให้แสดงตัวช่วยโหลด
-
+    
     const getData = async () => {
       try {
         Loading.value = true; //ถ้าค่า = true ให้เริ่มหมุน
@@ -74,7 +78,20 @@ export default {
       getData();
     });
 
-    return { categories, errorMessage, Loading };
+    const deleteCategoryById = async (id) => {
+      const isConfirm = window.confirm("แน่ใจว่าต้องการลบข้อมูลนี้");
+      if (isConfirm == true) {
+        const response = await axios.delete(`${BASE_API_URL}/api/category/${id}`);  
+        await Swal.fire(
+          response.data.message,
+          'ผลการทำงาน',
+          'success'
+        );
+        history.go(0);
+      }
+    }
+
+    return { categories, errorMessage, Loading,deleteCategoryById };
   },
 };
 </script>
