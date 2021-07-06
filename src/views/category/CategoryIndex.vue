@@ -27,7 +27,11 @@
             <tr v-for="item in categories" :key="item.id">
               <th scope="row">{{ item.id }}</th>
               <td>{{ item.name }}</td>
-              <td>Edit | Delete</td>
+              <td>
+                <router-link :to="{name: 'CategoryEdit', params:{id:item.id}}">
+                  แก้ไข
+                </router-link>
+                Delete</td>
             </tr>
           </tbody>
         </table>

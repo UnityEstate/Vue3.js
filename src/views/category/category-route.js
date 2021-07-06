@@ -2,7 +2,7 @@ import {h, resolveComponent} from "vue";
 
 import CategoryIndex from "./CategoryIndex.vue";
 import CategoryAdd from "./CategoryAdd.vue";
-// import CategoryEdit from "./CategoryEdit.vue";
+import CategoryEdit from "./CategoryEdit.vue";
 
 const categoryRoute = [
     {
@@ -21,6 +21,11 @@ const categoryRoute = [
                 path: "add",
                 name: "CategoryAdd",
                 component: CategoryAdd
+            },
+            {
+                path: ":id/edit", //route parameter
+                name: "CategoryEdit",
+                component: CategoryEdit
             }
             
         ]
