@@ -15,47 +15,14 @@
     </div>
   </div>
 </template>
-
 <script>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRouter, useRoute } from "vue-router"; //เปิดเพจใหม่คล้าย router-link
-import Swal from "sweetalert2";
-import {BASE_API_URL} from "../../constants";
+
+import { useEdit } from "./use/crud-category";
 
 export default {
   name: "CategoryEdit",
   setup() {
-    const id = ref(0);
-    const name = ref("");
-    const router = useRouter();
-    const route = useRoute();
-
-    onMounted(() => {
-      id.value = route.params.id;
-      // alert(id.value);
-      getCategoryByID(id.value);
-    });
-
-    const getCategoryByID = async (id) => {
-      const response = await axios.get(`${BASE_API_URL}/api/category/${id}`);
-      name.value = response.data.name;
-    }
-
-    const onSubmit = async () => {
-      const response = await axios.put(`${BASE_API_URL}/api/category`,{
-        id: id.value,
-        name: name.value,
-        });
-      // alert(response.data.message);
-      Swal.fire(
-        response.data.message,
-        "ผลการทำงาน",
-        "success"
-        );
-      router.replace("/category");
-    };
-
+    const { name, onSubmit } = useEdit();
     return { name, onSubmit };
   },
 };
