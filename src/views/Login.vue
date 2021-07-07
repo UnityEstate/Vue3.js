@@ -91,7 +91,7 @@
 // import { ref } from '@vue/reactivity';
 import { ref } from "vue";
 import axios from "axios";
-// import { useRouter } from "vue-router" //กลับหน้าแรก
+import { useRouter } from "vue-router" //กลับหน้าแรก
 import { BASE_API_URL} from "../constants";
 
 export default {
@@ -99,13 +99,22 @@ export default {
   setup() {
     const email = ref("");
     const password = ref("");
+    const router = useRouter();
 
     const onSubmit = async () => {
-      const response = await axios.post(`${BASE_API_URL}/api/login`,{
+     try {
+        const response = await axios.post(`${BASE_API_URL}/api/login`,{
         email: email.value,
         password: password.value,
       });
-      console.log(response.data);
+      // console.log(response.data);  //เพื่อดูค่าที่ server ส่งมาที่ network
+      localStorage.setItem("token", JSON.stringify(response.data));   //เป็นฐานข้อมูลแบบ key value เก็บลงใน browser เก็บแบบ json string
+      router.push("/");  //กลับไปที่หน้าแรก
+
+     } catch (error) {
+       alert(JSON.stringify(error.response.data));  // aios error
+       
+     }
     } 
     return {email,password,onSubmit}
   }
