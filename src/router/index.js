@@ -5,12 +5,14 @@ import DashBoard from "../layouts/DashBoard.vue";
 import Product from "../views/Product.vue";
 
 import categoryRoute from "../views/category/category-route";
+import { from } from "core-js/core/array";
 
 const routes = [
   {
     path: "/",
     name: "DashBoard",
     component: DashBoard,
+    meta: { requireAuth: true },  //จะต้องมีการ login ถึงจะใช้งานฟังห์ชั้นนี้ได้
     children: [
       {
         path: "",
@@ -30,7 +32,6 @@ const routes = [
         component: Product,
       },
       ...categoryRoute,
-
     ],
   },
   {
@@ -48,6 +49,20 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   linkExactActiveClass: "active",
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requireAuth)) { //ตรวจสอบว่ามี requireAuth = true
+    //ตรวจสอบ token ว่ามีหรือไม่
+    const token = localStorage.getItem("token");
+    if (!token) {
+      next("/login");
+    } else {
+      next();
+    }       
+  } else {
+    next();    
+  }
 });
 
 export default router;
