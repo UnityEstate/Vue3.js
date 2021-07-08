@@ -52,7 +52,7 @@
           <li><a class="dropdown-item" href="#!">Settings</a></li>
           <li><a class="dropdown-item" href="#!">Activity Log</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#!">Logout</a></li>
+          <li><a class="dropdown-item" href="#!" @click.prevent="logout">Logout</a></li>
         </ul>
       </li>
     </ul>
@@ -60,8 +60,19 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
   name: "NavBar",
+  setup() {
+    const router = useRouter();
+
+    const logout = () => {
+      localStorage.removeItem("token");
+      router.replace("/login");
+    };
+
+    return { logout }
+  }
 };
 </script>
 
