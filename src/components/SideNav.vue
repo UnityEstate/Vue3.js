@@ -34,17 +34,25 @@
 
         </div>
       </div>
-      <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
+      <div class="sb-sidenav-footer" v-if="store.state.profile">
+        <div class="small">Logged in as:{{ store.state.profile?.name}}</div>
+       Email: {{  store.state.profile?.name}}
       </div>
     </nav>
   </div>
 </template>
 
 <script>
+import { useStore } from "vuex";
 export default {
   name: "SideNav",
+  setup() {
+    const store = useStore();
+
+    return {
+      store
+    }
+  }
 };
 </script>
 
