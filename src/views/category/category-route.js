@@ -15,21 +15,21 @@ const categoryRoute = [
             {
                 path: "",
                 name: "CategoryIndex",
-                component: CategoryIndex
+                component: CategoryIndex,
             },
             {
                 path: "add",
                 name: "CategoryAdd",
-                component: CategoryAdd
+                component: CategoryAdd,
             },
             {
                 path: ":id/edit", //route parameter
                 name: "CategoryEdit",
-                component: CategoryEdit
-            }
+                component: CategoryEdit,
+            },
             
-        ]
+        ],
 
-    }
+    },
 ];
 export default categoryRoute;

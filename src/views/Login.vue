@@ -109,7 +109,7 @@ export default {
       });
       // console.log(response.data);  //เพื่อดูค่าที่ server ส่งมาที่ network
       localStorage.setItem("token", JSON.stringify(response.data));   //เป็นฐานข้อมูลแบบ key value เก็บลงใน browser เก็บแบบ json string
-      router.push("/");  //กลับไปที่หน้าแรก
+      router.replace("/");  //กลับไปที่หน้าแรก
 
      } catch (error) {
        alert(JSON.stringify(error.response.data));  // aios error

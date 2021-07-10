@@ -4,15 +4,16 @@ import About from "../views/About.vue";
 import DashBoard from "../layouts/DashBoard.vue";
 import Product from "../views/Product.vue";
 
+
+
 import categoryRoute from "../views/category/category-route";
-import { from } from "core-js/core/array";
 
 const routes = [
   {
     path: "/",
     name: "DashBoard",
     component: DashBoard,
-    meta: { requireAuth: true },  //จะต้องมีการ login ถึงจะใช้งานฟังห์ชั้นนี้ได้
+    meta: { requireAuth: true },  //route ไหนจะใช้ meta  จะต้องมีการ login ถึงจะใช้งานฟังห์ชั้นนี้ได้
     children: [
       {
         path: "",
