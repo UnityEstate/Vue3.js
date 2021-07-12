@@ -17,7 +17,7 @@ export default createStore({
   async getProfile ({commit}) {   
     //get profile from backend 
     const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
+    if (token) {  //ถ้ามี token จริงให้ไปดึง axios
       const response = await axios.get(`${BASE_API_URL}/api/profile`,{
       headers: { Authorization: "Bearer " + token.access_token },
     });
