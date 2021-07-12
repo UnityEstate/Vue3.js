@@ -93,6 +93,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router" //กลับหน้าแรก
 import { BASE_API_URL} from "../constants";
+import { useStore } from "vuex";
 
 export default {
   name: "Login",
@@ -100,6 +101,7 @@ export default {
     const email = ref("");
     const password = ref("");
     const router = useRouter();
+    const store = useStore();
 
     const onSubmit = async () => {
      try {
@@ -109,6 +111,8 @@ export default {
       });
       // console.log(response.data);  //เพื่อดูค่าที่ server ส่งมาที่ network
       localStorage.setItem("token", JSON.stringify(response.data));   //เป็นฐานข้อมูลแบบ key value เก็บลงใน browser เก็บแบบ json string
+      //call action
+      store.dispatch("getProfile");
       router.replace("/");  //กลับไปที่หน้าแรก
 
      } catch (error) {

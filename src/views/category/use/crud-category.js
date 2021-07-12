@@ -70,7 +70,7 @@ export function useIndex(){
       try {
         loading.value = true; //ถ้าค่า = true ให้เริ่มหมุน
         const response = await axios.get(`${BASE_API_URL}/api/category?page=${page}&page_size=10`);
-        categories.value = response.data.last_data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 ไม่มีเนื่องจากที่ postman ไม่ได้ส่งมา
+        categories.value = response.data.data; //[{id:...}] กรณีที่ใช้ axios ต้อง .data1 เสมอ  /.data2 ไม่มีเนื่องจากที่ postman ไม่ได้ส่งมา
         // console.log(products.data);
         totalPage.value = response.data.last_page;
       } catch (error) {
@@ -96,6 +96,6 @@ export function useIndex(){
         history.go(0);
       }
     };
-    return { categories, errorMessage, Loading, deleteCategoryById, page, totalPage, getData };
+    return { categories, errorMessage, loading, deleteCategoryById, page, totalPage, getData };
 
 }

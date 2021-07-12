@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4" v-if="profile">
+      ยินดีต้อนรับ คุณ {{ profile?.name }}</h1>
     <ol class="breadcrumb mb-4">
       <li class="breadcrumb-item active">Dashboard</li>
     </ol>
@@ -81,14 +82,17 @@
   </div>
 </template>
 <script>
+
+import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "Home",
   setup() {
     const store = useStore();
+    const profile = computed(() => store.state.profile); //เลือก state profile
 
     return {
-      store
+      profile
     }
   }
 };

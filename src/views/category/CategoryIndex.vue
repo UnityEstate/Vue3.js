@@ -57,8 +57,8 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 import { useIndex } from "./use/crud-category";
 import VPagination from "@hennge/vue3-pagination";
 
@@ -68,8 +68,8 @@ export default {
     VPagination,
   },
   setup() {
-    const { categories, errorMessage, Loading, deleteCategoryById, page, totalPage, getData } = useIndex();
-    return { categories, errorMessage, Loading, deleteCategoryById, page, totalPage, getData };   
+    const { categories, errorMessage, loading, deleteCategoryById, page, totalPage, getData } = useIndex();
+    return { categories, errorMessage, loading, deleteCategoryById, page, totalPage, getData };   
   },
 };
 </script>
