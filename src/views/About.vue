@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about px-4">
     <h1>เกี่ยวกับเรา</h1>
     <p>{{ email }}</p>
     <a :href="googleUrl">Google</a>
@@ -8,6 +8,16 @@
     <button class="btn btn-info" @click="greet">Click Me!</button>
     <br />
     <Logo />
+    <div>
+      <h1>ตัวอย่าง Upload File</h1>
+      <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <input type="file" name="picture" ref="file" />  
+        <button type="submit">Upload</button>
+      </form>
+
+    </div>
+
+
   </div>
 </template>
 
@@ -28,12 +38,27 @@ export default {
       alt: "My Image",
     });
     const isShow = ref(false);
+    const file = ref(null);  //กรณีเป็น ref ของ template ให้ใช้ null
+
+    const onSubmit = () => {
+      console.log(file.value.files[0]);  //อ้างไฟล์ที่ผู้ใช้ upload มา
+      const fileUplaod = file.value.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(fileUplaod);
+      //ผลลัพที่ onload
+      reader.onload = (e) => {
+        const base64Image = e.target.result;
+        console.log(base64Image);
+        //ให้ส่ง base64Image ไปอับโหลดที่ server โดยใช้ axios
+
+      }    
+    }
 
     onMounted(() => {
-      alert("Hello About Page");
+      // alert("Hello About Page");
     });
     onUnmounted(() => {
-      alert("Bye About Page");
+      // alert("Bye About Page");
     });
 
     const greet = () => {
@@ -42,7 +67,7 @@ export default {
       // isShow.value = true;
       isShow.value = !isShow.value; //toggle
     };
-    return { email, googleUrl, imgUrl, isShow, greet };
+    return { email, googleUrl, imgUrl, isShow, greet, onSubmit, file };
   },
 };
 </script>
